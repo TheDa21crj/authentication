@@ -1,5 +1,5 @@
-import React, { useContext, Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // axios
 import axios from "axios";
