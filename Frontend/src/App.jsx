@@ -1,3 +1,4 @@
+import React, { useContext, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 // axios
@@ -12,13 +13,20 @@ import Register from "./Pages/Register";
 // defaults baseURL
 axios.defaults.baseURL = "http://localhost:5000/";
 
+import AuthContext from "./store/auth-context";
+
 function App() {
+  const authCtx = useContext(AuthContext);
+
+  console.log(authCtx.isLoggedIn);
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/Login" element={<Login />} />
+        {authCtx.isLoggedIn && <Route path="/" element={<Home />} />}
+        {!authCtx.isLoggedIn && (
+          <Route path="/Register" element={<Register />} />
+        )}
+        {!authCtx.isLoggedIn && <Route path="/Login" element={<Login />} />}
         <Route path="*" element={<Error />} />
       </Routes>
     </Router>
