@@ -12,12 +12,11 @@ const register = async (req, res, next) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
-  const { name, email } = req.body;
+  const { name, email, password } = req.body;
 
   let users;
   try {
-    users = await user.findOne({ email: email });
-    console.log(users);
+    users = await user.findOne({ email });
   } catch (e) {
     const error = new HttpError("Wrong Email Credentials", 400);
     return next(error);
@@ -40,13 +39,10 @@ const register = async (req, res, next) => {
       email: email,
       password: password,
       avatar: avatar,
-      skills,
-      Linkedin,
-      College,
     });
 
     try {
-      const createduser = await newUser.save();
+      await newUser.save();
 
       let token;
 
