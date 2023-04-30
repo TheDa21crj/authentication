@@ -4,6 +4,9 @@ import AuthContext from "./../store/auth-context";
 import axios from "axios";
 
 export default function Register() {
+  const authCtx = useContext(AuthContext);
+  const redirect = useNavigate();
+
   const [show, set] = useState("");
 
   const [showUser, setUser] = useState({
@@ -73,7 +76,7 @@ export default function Register() {
           }
         } else {
           alert("Account already exists . please login");
-          redirect("/signin");
+          redirect("/Login");
         }
       } catch (error) {
         console.error(error);
