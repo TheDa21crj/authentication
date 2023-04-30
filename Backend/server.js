@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
   res.status(202).send("HEllo World");
 });
 
-// app.use("/api/user", require("./routes/user"));
+app.use("/api/user", require("./routes/user"));
 
 const port = process.env.PORT || 5000;
 
